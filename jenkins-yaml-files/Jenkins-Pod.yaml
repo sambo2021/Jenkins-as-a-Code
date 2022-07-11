@@ -6,12 +6,18 @@ metadata:
   labels: 
     run: jenkins
 spec:
+  securityContext:
+    runAsUser: 0
+    runAsGroup: 0 
   containers:
   - name: jenkins-container
     image: jenkins/jenkins:lts
     resources:
       limits:
-        memory: "128Mi"
+        memory: "4Gi"
+        cpu: "1000m"
+      requests:
+        memory: "500Mi"
         cpu: "500m"
     ports:
       - name: http-port
@@ -31,7 +37,7 @@ spec:
   volumes:
     - name: jenkins-conf
       hostPath:
-        path:  ./casc_configs/
+        path:  /home/sambo/ITI/labs/JCASC/Jenkins-as-a-Code/jenkins-yaml-files/casc_configs
         type: DirectoryOrCreate
     - name: jenkins-data
       persistentVolumeClaim:
