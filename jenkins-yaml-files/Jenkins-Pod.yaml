@@ -37,7 +37,7 @@ spec:
   volumes:
     - name: jenkins-conf
       hostPath:
-        path:  /home/sambo/ITI/labs/JCASC/Jenkins-as-a-Code/jenkins-yaml-files/casc_configs
+        path:  /casc_configs
         type: DirectoryOrCreate
     - name: jenkins-data
       persistentVolumeClaim:
