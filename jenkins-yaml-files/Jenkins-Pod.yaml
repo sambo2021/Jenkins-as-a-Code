@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jenkins
+  namespace: jenkins
+  labels: 
+    run: jenkins
+spec:
+  containers:
+  - name: jenkins-container
+    image: jenkins/jenkins:lts
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - name: http-port
+        containerPort: 8080
+      - name: jnlp-port
+        containerPort: 5000
+    env:
+      - name: CASC_JENKINS_CONFIG
+        value: /var/jenkins_conf.jenkins.yaml
+    volumeMounts:
+      - name: jenkins-conf
+        mountPath: /var/jenkins_conf
+      - name: jenkins-data
+        mountPath: /var/jenkins_home
+      #home dir of jenkins so jenkins
+      #data will persist
+  volumes:
+    - name: jenkins-conf
+      hostPath:
+        path:  ../casc_configs/
+        type: DirectoryOrCreate
+    - name: jenkins-data
+      persistentVolumeClaim:
+        claimName: jenkins-pv-claim
+
+
+
+      
