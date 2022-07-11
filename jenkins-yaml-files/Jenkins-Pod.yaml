@@ -31,7 +31,7 @@ spec:
   volumes:
     - name: jenkins-conf
       hostPath:
-        path:  ../casc_configs/
+        path:  ./casc_configs/
         type: DirectoryOrCreate
     - name: jenkins-data
       persistentVolumeClaim:
