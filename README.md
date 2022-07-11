@@ -1,6 +1,14 @@
+- building minikube remotly on ec2 instance 
+```sh
+  git clone https://github.com/sambo2021/Jenkins-as-a-Code.git
+  cd /Jenkins-as-a-Code.git/Minikube-Infra
+  touch TF_key.pem
+  ./Build.sh
+```
+
 - after ssh to your ec2 you can create your local registry of docker images
 ```sh
-  cd /Dockerfile-Plugins
+  cd ../Dockerfile-Plugins
   sudo docker build -t customized-jenkins .
   sudo docker run -d -p 5000:5000 --restart=always --name registry registry:2 
   sudo docker tag customized-jenkins localhost:5000/customized-jenkins
@@ -15,4 +23,17 @@
       imagePullPolicy: IfNotPresent
 ```
 
+
+- then create all yaml of jenkins 
+```sh
+   cd ../jenkins-yamle-files
+   sudo kubectl create namespace jenkins
+   sudo kubectl create -f Jenkins-Service-Account.yaml
+   sudo kubectl create -f Jenkins-Cluster-Role.yaml
+   sudo kubectl create -f Jenkins-Cluster-Role-Binding.yaml
+   sudo kubectl create -f Jenkins-Presistent-Volume.yaml
+   sudo kubectl create -f Jenkins-Service.yaml
+   sudo kubectl create -f Jenkins-Pod.yaml
+```
+- now you can access jenkins at ec2_public_IP with name and password admin:admin as configured in Dockerfile
 - finally the purpose of this repo to build jenkins pod on kubernetes with preinstalled plugins and password as shown in Dockerfile-Plugins path
