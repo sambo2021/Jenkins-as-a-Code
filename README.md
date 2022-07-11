@@ -13,5 +13,6 @@
     - name: <container name>
       image: localhost:5000/customized-jenkins
       imagePullPolicy: IfNotPresent
-
 ```
+
+- finally the purpose of this repo to build jenkins pod on kubernetes with preinstalled plugins and password as shown in Dockerfile-Plugins path

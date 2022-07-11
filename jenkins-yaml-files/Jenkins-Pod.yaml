@@ -11,7 +11,7 @@ spec:
     runAsGroup: 0 
   containers:
   - name: jenkins-container
-    image: jenkins/jenkins:lts
+    image: mohamedsambo/customized-jenkins:v1
     resources:
       limits:
         memory: "4Gi"
@@ -24,21 +24,19 @@ spec:
         containerPort: 8080
       - name: jnlp-port
         containerPort: 5000
-    env:
-      - name: CASC_JENKINS_CONFIG
-        value: /var/jenkins_conf.jenkins.yaml
+    # env:
+    #   - name: CASC_JENKINS_CONFIG
+    #     value: /var/jenkins_conf/jenkins.yaml
     volumeMounts:
-      - name: jenkins-conf
-        mountPath: /var/jenkins_conf
+     # - name: jenkins-conf
+     #   mountPath: /var/jenkins_conf
       - name: jenkins-data
         mountPath: /var/jenkins_home
-      #home dir of jenkins so jenkins
-      #data will persist
   volumes:
-    - name: jenkins-conf
-      hostPath:
-        path:  /casc_configs
-        type: DirectoryOrCreate
+    # - name: jenkins-conf
+    #   hostPath:
+    #     path:  /data
+    #     type: DirectoryOrCreate
     - name: jenkins-data
       persistentVolumeClaim:
         claimName: jenkins-pv-claim
