@@ -39,5 +39,6 @@
 ```sh
 sudo kubectl exec -it jenkins -n jenkins  -- /bin/bash
 ```
+- or copy that jenkins.yaml into /data/jenkins-volume inside minikube cuse it is mounted by volume claim into jenkins pod
 - now you can access jenkins at ec2_public_IP with name and password admin:admin as configured in Dockerfile
 - finally the purpose of this repo to build jenkins pod on kubernetes with preinstalled plugins and password as shown in Dockerfile-Plugins path
