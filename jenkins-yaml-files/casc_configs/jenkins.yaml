@@ -1,5 +1,5 @@
 jenkins:
-  systemMessage: "\n\nDemo setup for Jenkins Configuration as Code plugin......\n\n"
+  systemMessage: "\n\n Demo setup for Jenkins Configuration as Code plugin......\n\n"
   numExecutors: 1
   mode: NORMAL
   scmCheckoutRetryCount: 3

@@ -35,5 +35,9 @@
    sudo kubectl create -f Jenkins-Service.yaml
    sudo kubectl create -f Jenkins-Pod.yaml
 ```
+- exec jenkins pod and cp filr jenkins.yaml into /var/jenkins_home/jenkins.yaml to just test configuration as a code manually at first then we gonna automate it by volume mounting 
+```sh
+sudo kubectl exec -it jenkins -n jenkins  -- /bin/bash
+```
 - now you can access jenkins at ec2_public_IP with name and password admin:admin as configured in Dockerfile
 - finally the purpose of this repo to build jenkins pod on kubernetes with preinstalled plugins and password as shown in Dockerfile-Plugins path
